@@ -1,142 +1,180 @@
 import Link from 'next/link';
+import { ArrowRight, Sparkles, BookOpen, FileText, Layers3, Wand2 } from 'lucide-react';
+import { blogPosts } from '@/lib/blog';
+
+const metrics = [
+  { label: 'Landing pages', value: '01' },
+  { label: 'Blog stories', value: '04' },
+  { label: 'Motion layers', value: '08' },
+];
+
+const features = [
+  {
+    icon: Sparkles,
+    title: 'Silný vizuální úvod',
+    text: 'Hero sekce, CTA a jemné glow vrstvy, které působí moderně a pořád zůstávají jednoduché.',
+  },
+  {
+    icon: BookOpen,
+    title: 'Blog jako obsahový hub',
+    text: 'Přehled článků, rychlé prokliknutí a rozumné vizuální členění bez chaosu.',
+  },
+  {
+    icon: Layers3,
+    title: 'Lehké motion vrstvy',
+    text: 'Float, fade-up a hover přechody pro lepší feeling bez agresivních animací.',
+  },
+  {
+    icon: Wand2,
+    title: 'Skeleton loading',
+    text: 'Stránky působí připraveně ještě před načtením obsahu díky shimmer placeholderům.',
+  },
+];
 
 export default function HomePage() {
-  const features = [
-    {
-      title: 'Rychlé hledání',
-      description: 'Okamžitý přístup k dokumentaci, stránkám a ukázkám.'
-    },
-    {
-      title: 'MDX obsah',
-      description: 'Psaní dokumentace jako kód, s komponentami a bloky.'
-    },
-    {
-      title: 'GitHub Pages ready',
-      description: 'Jednoduchý static export a čistý deploy bez komplikací.'
-    },
-    {
-      title: 'Moderní UI',
-      description: 'Čistý docs-first vzhled inspirovaný Fumadocs.'
-    }
-  ];
+  const featured = blogPosts.filter((post) => post.featured).slice(0, 2);
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#09090b] text-white antialiased">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_45%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:32px_32px] opacity-40" />
+    <main className="relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 opacity-70">
+        <div className="animate-float-slow absolute left-[-5rem] top-24 h-64 w-64 rounded-full bg-cyan-400/10 blur-3xl" />
+        <div className="animate-float-slow absolute right-[-4rem] top-40 h-72 w-72 rounded-full bg-indigo-400/10 blur-3xl [animation-delay:1.5s]" />
+      </div>
 
-      <header className="sticky top-0 z-50 border-b border-white/5 bg-[#09090b]/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="h-2.5 w-2.5 rounded-full bg-white" />
-            <span className="text-sm font-medium uppercase tracking-[0.24em] text-white/75">
-              AKCIZUR DOCS
-            </span>
-          </Link>
-
-          <nav className="hidden items-center gap-8 text-sm text-white/55 md:flex">
-            <a href="#features" className="transition hover:text-white">
-              Features
-            </a>
-            <Link href="/docs" className="transition hover:text-white">
-              Docs
-            </Link>
-            <a
-              href="https://github.com/AKCIZUR/docs"
-              className="transition hover:text-white"
-            >
-              GitHub
-            </a>
-          </nav>
-        </div>
-      </header>
-
-      <section className="relative mx-auto flex min-h-[90vh] max-w-7xl flex-col justify-center px-6 py-24">
-        <div className="max-w-4xl">
-          <div className="mb-6 inline-flex rounded-full border border-white/10 bg-[#111113] px-4 py-2 text-sm text-white/70">
-            Minimal developer documentation
-          </div>
-
-          <h1 className="text-5xl font-bold leading-tight tracking-tight md:text-7xl">
-            Modern documentation
-            <br />
-            for developers.
-          </h1>
-
-          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/60 md:text-xl">
-            Clean homepage inspired by modern docs systems like Fumadocs,
-            Vercel and shadcn/ui.
-          </p>
-
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Link
-              href="/docs"
-              className="rounded-2xl bg-white px-8 py-4 font-semibold text-black transition hover:opacity-90"
-            >
-              Open Docs
-            </Link>
-
-            <a
-              href="https://github.com/AKCIZUR/docs"
-              className="rounded-2xl border border-white/10 bg-[#111113] px-8 py-4 font-semibold text-white transition hover:bg-white/10"
-            >
-              GitHub
-            </a>
-          </div>
-        </div>
-
-        <div className="mt-20 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-2xl border border-white/10 bg-[#111113] p-6">
-            <div className="mb-5 flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-red-500" />
-              <div className="h-3 w-3 rounded-full bg-yellow-500" />
-              <div className="h-3 w-3 rounded-full bg-green-500" />
+      <section className="relative mx-auto flex min-h-[calc(100vh-1px)] max-w-7xl flex-col justify-center px-6 py-16 lg:px-10">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+          <div className="space-y-8">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 backdrop-blur animate-fade-up">
+              <Sparkles className="h-4 w-4 text-cyan-300" />
+              Homepage + blog + motion + skeleton loading
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-[#0d0d10] p-6 font-mono text-sm leading-7 text-white/75">
-              <div>
-                <span className="text-white">$</span> npm run build
-              </div>
-              <div>✓ Static export ready</div>
-              <div>✓ MDX pages loaded</div>
-              <div>✓ GitHub Pages deploy ok</div>
+            <div className="space-y-5">
+              <h1 className="max-w-3xl text-5xl font-semibold tracking-tight text-white md:text-7xl animate-fade-up [animation-delay:80ms]">
+                Dokonalý start pro docs web s lehkým pohybem
+              </h1>
+              <p className="max-w-2xl text-base leading-8 text-slate-300 md:text-lg animate-fade-up [animation-delay:160ms]">
+                Úvodní stránka vede na dokumentaci i blog, drží jednoduchý dark styl a přidává
+                čisté animace, které působí moderně bez rušivého efektu.
+              </p>
             </div>
-          </div>
 
-          <div className="grid gap-4">
-            {['MDX', 'Search', 'GitHub Pages', 'Dark UI'].map((item) => (
-              <div
-                key={item}
-                className="rounded-2xl border border-white/10 bg-[#111113] p-5 text-sm text-white/70"
+            <div className="flex flex-wrap gap-3 animate-fade-up [animation-delay:240ms]">
+              <Link
+                href="/docs"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-medium text-slate-950 transition-transform duration-300 hover:-translate-y-0.5"
               >
-                {item}
+                Otevřít dokumentaci
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/blog"
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-medium text-white transition-colors duration-300 hover:bg-white/10"
+              >
+                Přejít na blog
+              </Link>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-3 animate-fade-up [animation-delay:320ms]">
+              {metrics.map((item) => (
+                <div
+                  key={item.label}
+                  className="rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur"
+                >
+                  <div className="text-2xl font-semibold text-white">{item.value}</div>
+                  <div className="mt-1 text-sm text-slate-400">{item.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative animate-fade-up [animation-delay:180ms]">
+            <div className="absolute inset-0 -z-10 rounded-[2rem] bg-gradient-to-br from-cyan-500/15 via-transparent to-indigo-500/15 blur-2xl" />
+            <div className="rounded-[2rem] border border-white/10 bg-slate-900/80 p-6 shadow-2xl shadow-cyan-950/30 backdrop-blur">
+              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <div>
+                  <p className="text-sm text-slate-400">Live preview</p>
+                  <h2 className="text-xl font-semibold text-white">Rychlé přehledy obsahu</h2>
+                </div>
+                <div className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
+                  Ready
+                </div>
               </div>
-            ))}
+
+              <div className="mt-6 grid gap-4">
+                {featured.map((post) => (
+                  <Link
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
+                    className="group rounded-3xl border border-white/10 bg-white/5 p-5 transition-transform duration-300 hover:-translate-y-1"
+                  >
+                    <div className="mb-3 flex items-center justify-between text-xs uppercase tracking-[0.2em] text-slate-500">
+                      <span>{post.category}</span>
+                      <span>{post.readingTime}</span>
+                    </div>
+                    <h3 className="text-lg font-semibold text-white">{post.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-300">{post.description}</p>
+                    <div className="mt-4 flex items-center justify-between text-sm text-slate-400">
+                      <span>{post.date}</span>
+                      <span className="inline-flex items-center gap-1 text-cyan-300">
+                        Číst dál
+                        <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
+
+        <section className="mt-16 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {features.map((feature, index) => {
+            const Icon = feature.icon;
+            return (
+              <article
+                key={feature.title}
+                className="animate-fade-up rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur"
+                style={{ animationDelay: `${120 + index * 90}ms` }}
+              >
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10">
+                  <Icon className="h-5 w-5 text-cyan-300" />
+                </div>
+                <h3 className="mt-4 text-lg font-semibold text-white">{feature.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-300">{feature.text}</p>
+              </article>
+            );
+          })}
+        </section>
       </section>
 
-      <section id="features" className="mx-auto max-w-7xl px-6 py-24">
-        <div className="mb-14 text-center">
-          <h2 className="text-4xl font-bold md:text-5xl">
-            Built for developer workflows
-          </h2>
-          <p className="mt-4 text-white/50">
-            Minimal structure, readable content and clean navigation.
-          </p>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {features.map((feature) => (
-            <div
-              key={feature.title}
-              className="rounded-2xl border border-white/10 bg-[#111113] p-7 transition hover:border-white/20"
-            >
-              <div className="mb-6 h-12 w-12 rounded-2xl bg-white/10" />
-              <h3 className="text-xl font-semibold">{feature.title}</h3>
-              <p className="mt-3 text-white/60">{feature.description}</p>
+      <section className="mx-auto max-w-7xl px-6 pb-20 lg:px-10">
+        <div className="rounded-[2rem] border border-white/10 bg-gradient-to-r from-white/10 to-white/5 p-6 backdrop-blur md:p-8">
+          <div className="grid gap-6 md:grid-cols-[1.3fr_0.7fr] md:items-center">
+            <div>
+              <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Next step</p>
+              <h2 className="mt-2 text-3xl font-semibold text-white">Blog rozdělený do jasných bloků</h2>
+              <p className="mt-3 max-w-2xl text-slate-300">
+                Každý článek dostane vlastní kartu, šetrný hover efekt a skeleton loading, aby
+                stránka působila rychle a připraveně.
+              </p>
             </div>
-          ))}
+            <div className="flex flex-wrap gap-3 md:justify-end">
+              <Link
+                href="/blog"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-medium text-slate-950 transition-transform duration-300 hover:-translate-y-0.5"
+              >
+                Zobrazit blog
+                <FileText className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/docs"
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-transparent px-5 py-3 text-sm font-medium text-white transition-colors duration-300 hover:bg-white/10"
+              >
+                Přejít do docs
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </main>
