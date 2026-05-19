@@ -2,7 +2,7 @@ import { createMDX } from 'fumadocs-mdx/next';
 
 const withMDX = createMDX();
 
-const repo = 'docs';
+const repo = 'dd2';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
